@@ -145,7 +145,7 @@ def main():
         raise Exception("Unknown model type {0}".format(args.model_type))
 
     args.max_features = min(
-        len(vectorizer.get_feature_names()),
+        len(vectorizer.get_feature_names_out()),
         args.max_features
     )
 
@@ -194,9 +194,9 @@ def main():
 
     # build and save rule
     if type(classifier) == RandomForestClassifier:
-        rule = convert_tree.convert_randomforest(args.rule_name,classifier,vectorizer.get_feature_names(),args.detection_threshold)
+        rule = convert_tree.convert_randomforest(args.rule_name,classifier,vectorizer.get_feature_names_out(),args.detection_threshold)
     else:
-        rule = convert_linear.convert_linear(args.rule_name,classifier,vectorizer.get_feature_names(),args.detection_threshold)
+        rule = convert_linear.convert_linear(args.rule_name,classifier,vectorizer.get_feature_names_out(),args.detection_threshold)
 
     #print rule
     log("Writing rule to disk")
